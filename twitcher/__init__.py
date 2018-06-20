@@ -20,9 +20,7 @@ def main(global_config, **settings):
     from pyramid.config import Configurator
     from pyramid.authentication import AuthTktAuthenticationPolicy
     from pyramid.authorization import ACLAuthorizationPolicy
-
-
-    from magpie.models import group_finder
+    from ziggurat_foundations.models import groupfinder
 
     magpie_secret = os.getenv('MAGPIE_SECRET')
     if magpie_secret is None:
@@ -31,7 +29,7 @@ def main(global_config, **settings):
 
     authn_policy = AuthTktAuthenticationPolicy(
         magpie_secret,
-        callback=group_finder,
+        callback=groupfinder,
     )
     authz_policy = ACLAuthorizationPolicy()
 

@@ -12,7 +12,7 @@ from pyramid.httpexceptions import HTTPForbidden, HTTPNotFound
 from pyramid.interfaces import IAuthenticationPolicy, IAuthorizationPolicy
 from magpie.services import service_factory
 from magpie.models import Service
-from magpie.api_except import evaluate_call, verify_param
+from magpie.api.api_except import evaluate_call, verify_param
 from twitcher.datatype import Service
 
 
@@ -112,7 +112,7 @@ class OWSSecurity(object):
 try:
     from magpie.services import service_factory
     from magpie.models import Service
-    from magpie.api_except import evaluate_call, verify_param
+    from magpie.api.api_except import evaluate_call, verify_param
 except ImportError as e:
     LOGGER.warning('Can not import magpie : {!r}'.format(e))
 
