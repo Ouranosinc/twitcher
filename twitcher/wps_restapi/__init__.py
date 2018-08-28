@@ -1,9 +1,12 @@
 from pyramid.settings import asbool
 from twitcher.wps_restapi.frontpage import frontpage
 from twitcher.wps_restapi import swagger_definitions as sd
+from pyramid.httpexceptions import *
 from twitcher.wps_restapi.api import api_swagger_json, api_swagger_ui, api_versions
 from twitcher.db import MongoDB
 import logging
+from twitcher.owsexceptions import *
+from twitcher.exceptions import ServiceNotFound
 logger = logging.getLogger(__name__)
 
 
@@ -17,6 +20,7 @@ def includeme(config):
         config.include('twitcher.wps_restapi.providers')
         config.include('twitcher.wps_restapi.processes')
         config.include('twitcher.wps_restapi.jobs')
+        config.include('pyramid_mako')
         config.add_route(**sd.service_api_route_info(sd.api_frontpage_service, settings))
         config.add_route(**sd.service_api_route_info(sd.api_swagger_json_service, settings))
         config.add_route(**sd.service_api_route_info(sd.api_swagger_ui_service, settings))
