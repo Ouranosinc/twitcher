@@ -15,6 +15,7 @@ from webob.acceptparse import MIMEAccept
 from pyramid.interfaces import IExceptionResponse
 from pyramid.response import Response
 from pyramid.compat import text_type
+import os
 
 
 @implementer(IExceptionResponse)
@@ -73,7 +74,8 @@ class OWSException(Response, Exception):
                         self.excobj = excobj
 
                     def substitute(self, code, locator, message):
-                        return json.dumps(self.json_formatter(status=code, body=message))
+                        return json.dumps(OWSException.json_formatter(status=code, body=message,
+                                                                      title='Exception', environ=os.environ))
 
                 page_template = JsonPageTemplate(self)
 
